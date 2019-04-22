@@ -1,0 +1,8 @@
+<scroll-view scroll-x>
+  <view class='class-bar-wapper'>
+    <view class='classes-wapper' wx:for="{{classTitle}}">
+      <view class='class-title'>{{item}}</view>
+    </view>
+  </view>
+</scroll-view>
+<view class = 'lateast-news-wapper'></view>
