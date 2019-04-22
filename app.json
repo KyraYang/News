@@ -3,7 +3,7 @@
     "pages/index/index"
   ],
   "window": {
-    "backgroundTextStyle": "light",
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#B9E4C9",
     "navigationBarTitleText": "新闻小程序",
     "navigationBarTextStyle": "black"

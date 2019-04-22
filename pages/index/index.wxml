@@ -1,3 +1,4 @@
+<!--导航栏-->
 <scroll-view scroll-x>
   <view class='class-bar-wapper'>
     <view class='classes-wapper' wx:for="{{classTitle}}">
@@ -5,4 +6,20 @@
     </view>
   </view>
 </scroll-view>
-<view class = 'lateast-news-wapper'></view>
+<!--轮播最新热点-->
+<view class='lateast-news-wapper'>
+  <swiper autoplay='true' interval='5000' duration='1000' catchlongtap='onSwiperTap' mode='widthFix'>
+    <block wx:for='{{latestImgUrls}}'>
+      <swiper-item>
+        <image src="{{item}}" class='latest-news-image'></image>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
+
+<!--详细新闻-->
+<scroll-view scroll-y>
+<view class='news-list-wapper'>
+
+</view>
+</scroll-view>
