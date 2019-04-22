@@ -1,25 +1,33 @@
 <!--导航栏-->
 <scroll-view scroll-x>
-  <view class='class-bar-wapper'>
-    <view class='classes-wapper' wx:for="{{classTitle}}">
+  <view class='class-bar-wrapper'>
+    <view class='classes-wrapper' wx:for="{{classTitle}}">
       <view class='class-title'>{{item}}</view>
     </view>
   </view>
 </scroll-view>
 <!--轮播最新热点-->
-<view class='lateast-news-wapper'>
+<view class='lateast-news-wrapper'>
   <swiper autoplay='true' interval='5000' duration='1000' catchlongtap='onSwiperTap' mode='widthFix'>
-    <block wx:for='{{latestImgUrls}}'>
+    <block wx:for='{{latestNews}}'>
       <swiper-item>
-        <image src="{{item}}" class='latest-news-image'></image>
+        <image src="{{item.img}}" class='latest-news-image'></image>
+        <view class='latest-news-title'>{{item.title}}</view>
       </swiper-item>
     </block>
   </swiper>
 </view>
 
 <!--详细新闻-->
-<scroll-view scroll-y>
-<view class='news-list-wapper'>
+  <view class='news-list-wrapper'>
+    <view class='news-list' wx:for="{{newsList}}">
+      <view class='news-list-content'>
+        <view class='news-list-title'>{{item.title}}
+        </view>
+        <view class='news-list-source'>{{item.source}}</view>
+        <view class='news-list-date'>{{item.date}}</view>
+      </view>
+      <image class='news-list-img' mode='aspectFill' src='{{item.img}}'></image>
 
-</view>
-</scroll-view>
+    </view>
+  </view>
