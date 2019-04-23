@@ -1,0 +1,14 @@
+<!--pages/centent/content.wxml-->
+<view class='content-wrapper'>
+  <view class='title'>{{title}}</view>
+  <view class='source'>{{source}}</view>
+  <view class='date'>{{date}}</view>
+  <view class='content'>
+    <view wx:for="{{content}}">
+      <view wx:if="{{item.url}}">
+        <image src='{{item.url}}'></image>
+      </view>
+      <view wx:else>{{item}}</view>
+    </view>
+  </view>
+</view>
