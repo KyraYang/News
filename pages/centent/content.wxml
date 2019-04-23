@@ -8,7 +8,7 @@
   <view class='content'>
     <view wx:for="{{content}}">
       <view wx:if="{{item.url}}">
-        <image class='content-img' src='{{item.url}}'></image>
+        <image class='content-img' src='{{item.url}}' mode='aspectFill'></image>
       </view>
       <view wx:else class='content-text'>{{item}}</view>
     </view>

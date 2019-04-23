@@ -29,7 +29,7 @@
       <view class='news-list-source'>{{item.source}}</view>
       <view class='news-list-date'>{{item.date}}</view>
     </view>
-    <image class='news-list-img' mode='aspectFill' src='{{item.img}}'></image>
+    <image class='news-list-img' mode='widthFix' src='{{item.img}}'></image>
 
   </view>
 </view>
