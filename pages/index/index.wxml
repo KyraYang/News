@@ -11,23 +11,25 @@
   <swiper autoplay='true' interval='5000' duration='1000' catchlongtap='onSwiperTap' mode='widthFix'>
     <block wx:for='{{latestNews}}'>
       <swiper-item>
-        <image src="{{item.img}}" class='latest-news-image'></image>
-        <view class='latest-news-title'>{{item.title}}</view>
+        <view class='latest-news-swiper-wapper'>
+          <image src="{{item.img}}" class='latest-news-image' mode='aspectFill'></image>
+          <view class='latest-news-title'>{{item.title}}</view>
+        </view>
       </swiper-item>
     </block>
   </swiper>
 </view>
 
 <!--详细新闻-->
-  <view class='news-list-wrapper'>
-    <view class='news-list' wx:for="{{newsList}}">
-      <view class='news-list-content'>
-        <view class='news-list-title'>{{item.title}}
-        </view>
-        <view class='news-list-source'>{{item.source}}</view>
-        <view class='news-list-date'>{{item.date}}</view>
+<view class='news-list-wrapper'>
+  <view class='news-list' wx:for="{{newsList}}">
+    <view class='news-list-content'>
+      <view class='news-list-title'>{{item.title}}
       </view>
-      <image class='news-list-img' mode='aspectFill' src='{{item.img}}'></image>
-
+      <view class='news-list-source'>{{item.source}}</view>
+      <view class='news-list-date'>{{item.date}}</view>
     </view>
+    <image class='news-list-img' mode='aspectFill' src='{{item.img}}'></image>
+
   </view>
+</view>

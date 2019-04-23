@@ -45,8 +45,23 @@ swiper-item {
   width: 100%;
   height: 100%;
 }
-.lateast-news-title{
-  z-index: 20;
+.latest-news-swiper-wapper{
+  height: 350rpx;
+  position: relative;
+}
+.latest-news-image{
+position: absolute;
+left: 0;
+top: 0;
+}
+.latest-news-title{
+position: absolute;
+left: 0;
+top: 248rpx;
+text-align: left;
+padding-left:20rpx;
+padding-right: 10rpx;
+background-color: rgba(240, 233, 233, 0.822);
 }
 
 /*新闻列表*/
