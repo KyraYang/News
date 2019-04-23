@@ -1,11 +1,14 @@
 <!--导航栏-->
-<scroll-view scroll-x>
+
   <view class='class-bar-wrapper'>
+  <scroll-view  scroll-x>
+  <view class= 'class-bar-scroller'>
     <view class='classes-wrapper' wx:for="{{classTitle}}">
       <view class='class-title'>{{item}}</view>
-    </view>
+    </view></view>
+    </scroll-view>
   </view>
-</scroll-view>
+
 <!--轮播最新热点-->
 <view class='lateast-news-wrapper'>
   <swiper autoplay='true' interval='5000' duration='1000' catchlongtap='onSwiperTap' mode='widthFix'>
@@ -29,7 +32,7 @@
       <view class='news-list-source'>{{item.source}}</view>
       <view class='news-list-date'>{{item.date}}</view>
     </view>
-    <image class='news-list-img' mode='widthFix' src='{{item.img}}'></image>
+    <image class='news-list-img' mode='aspectFill' src='{{item.img}}'></image>
 
   </view>
 </view>
