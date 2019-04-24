@@ -11,9 +11,12 @@
 </view>
 
 <!--轮播最新热点-->
+<template is='Focused' data="{{...focusedNews}}"/>
+  <template name="Focused">
 <view class='lateast-news-wrapper'>
   <swiper autoplay='true' interval='5000' duration='1000' catchlongtap='onSwiperTap' mode='widthFix'>
-    <block wx:for='{{focusedNews}}'>
+
+    <block wx:for='{{gn}}'>
       <swiper-item>
         <view class='focused-news-swiper-wapper'>
           <image src="{{item.img}}" class='focused-news-image' mode='aspectFill'></image>
@@ -22,20 +25,24 @@
       </swiper-item>
     </block>
   </swiper>
-</view>
+</view></template>
 
 <!--详细新闻-->
+<template is='List' data="{{...newsList}}"/>
 <view class='news-list-wrapper'>
-  <view class='news-list' wx:for="{{newsList}}">
-    <view class='news-list-content'>
-      <view class='news-list-title'>{{item.title}}
+  <template name= 'List'>
+  <view class='news-list 'wx:for="{{gn}}">
+    <view class='news-list-content '>
+      <view class='news-list-title '>{{item.title}}
       </view>
-      <view class='news-list-source'>{{item.source}}</view>
-      <view class='news-list-date'>{{item.pubDate}}</view>
+      <view class='news-list-source '>{{item.source}}</view>
+      <view class='news-list-date '>{{item.pubDate}}</view>
     </view>
     <view>
-      <image class='news-list-img' wx:if="{{!item.img}}" src='../../images/defaultImg.jpg' mode='aspectFill'></image>
-    <image wx:else  class='news-list-img' mode='aspectFill ' src='{{item.img}} '></image>
+      <image class='news-list-img ' wx:if="{{!item.img}}" src='../../images/defaultImg.jpg ' mode='aspectFill '></image>
+    <image wx:else  class='news-list-img ' mode='aspectFill ' src='{{item.img}} '></image>
     </view>
-  </view>
+  </view></template>
 </view>
+
+

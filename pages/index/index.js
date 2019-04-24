@@ -25,40 +25,27 @@ const channelIdMap = {
 
 Page({
   data: {
-    focusedNews: [],
-    newsList: [{
-        "title": "外媒称香港回归15年打破“经济将死”预言",
-        "date": "2012-07-01T09:34:12.000Z",
-        "source": "中国新闻网",
-        "img": "http://img1.gtimg.com/news/pics/hv1/38/85/1076/69988613.jpg"
-      }, {
-        "id": 1519631218591,
-        "title": "实德指媒体窃公司机密 已向某媒体递律师函",
-        "date": "2012-04-21T11:32:04.000Z",
-        "source": "腾讯财经",
-        "img": "http://img1.gtimg.com/finance/pics/hv1/33/207/1023/66573393.jpg"
-      },
-      {
-        "id": 1519631218595,
-        "title": "公务员医疗费用成迷 学者呼吁管理应公开透明",
-        "date": "2012-02-26T08:13:00.000Z",
-        "source": "财新网",
-        "img": "http://img1.gtimg.com/finance/pics/hv1/241/102/983/63945826.jpg"
-      }, {
-        "id": 1552623252481,
-        "title": "王欣会：希望让“来自星星的孩子”有机会过上平等有尊严的生活",
-        "date": "2019-03-15T04:09:11.000Z",
-        "source": "新华网/中国政府网",
-        "img": "//inews.gtimg.com/newsapp_bt/0/8148265330/641"
-      }, {
-        "id": 1552623252486,
-        "title": "支月英：我希望有更多优秀青年投入到乡村教育 助力乡村全面振兴",
-        "date": "2019-03-15T04:08:31.000Z",
-        "source": "新华网/中国政府网",
-        "img": "//inews.gtimg.com/newsapp_bt/0/8148265329/641"
-      }
-    ]
-
+    focusedNews: {
+      'gn': [],
+      'gj': [],
+      'cj': [],
+      'hlw': [],
+      'ty': [],
+      'kj': [],
+      'sh': [],
+      'yl': [],
+      'js': []},
+    newsList: {
+      'gn': [],
+      'gj': [],
+      'cj': [],
+      'hlw': [],
+      'ty': [],
+      'kj': [],
+      'sh': [],
+      'yl': [],
+      'js': []
+    },
   },
   onLoad() {
     //set channel bar
@@ -69,9 +56,8 @@ Page({
     this.setData({
       channelTitle: channelTitle
     })
-    let focusedNews = []
    //get gn news
-   this.getNewsContent(channelIdMap.gn)
+   this.getNewsContent('gn')
   },
 
   //API接入
@@ -81,7 +67,7 @@ Page({
       data: {
         "showapi_appid": '92969', //这里需要改成自己的appid
         "showapi_sign": 'eedcb02a3323485a84c33b72074df757', //这里需要改成自己的应用的密钥secret
-        "channelId": channelId,
+        "channelId": channelIdMap[channelId],
         "page": "1",
         "needAllList": "0",
         "maxResult": "10",
@@ -104,9 +90,11 @@ Page({
             listNews.push(oneNews)
           }
         }
+        this.data.focusedNews[channelId] = imgNews
+        this.data.newsList[channelId] = listNews
         this.setData({
-          focusedNews: imgNews,
-          newsList: listNews
+          focusedNews: this.data.focusedNews,
+          newsList: this.data.newsList,
         })
       }
     })
