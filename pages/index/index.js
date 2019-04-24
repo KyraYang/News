@@ -10,7 +10,7 @@ const channelTitleMap = {
   'js': '军事',
 }
 const channelIdMap = {
-  //[0]focused, 
+  //焦点新闻, 
   'gn': "5572a108b3cdc86cf39001cd",
   'gj': "5572a108b3cdc86cf39001ce",
   'cj': "5572a108b3cdc86cf39001d0",
@@ -25,12 +25,7 @@ const channelIdMap = {
 
 Page({
   data: {
-    focusedNews: { 
-    },
-    newsList: {
-    },
     pageNumber: 1,
-    totalPage: 1,
   },
 
   //开始页面
@@ -130,10 +125,13 @@ console.log('refreshed')
     })
   },
 
-  /*点击轮播图时，跳转到相关新闻
-  onSwiperTap: () => {
+  //点击时，跳转到相关新闻
+  onTap: (event) => {
+    let newsId = event.currentTarget.dataset.id
+    console.log(newsId)
     wx.navigateTo({
-      url: '',
+      url: '../content/content?id='+newsId,
     })
-  }*/
+    
+  }
 })

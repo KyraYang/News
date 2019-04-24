@@ -13,10 +13,10 @@
 <!--轮播最新热点-->
 
 <view class='lateast-news-wrapper'>
-  <swiper autoplay='true' interval='5000' duration='1000' catchlongtap='onSwiperTap' mode='widthFix'>
+  <swiper autoplay='true' interval='5000' duration='1000'  mode='widthFix'>
     <block wx:for='{{focusedNews}}'>
       <swiper-item>
-        <view class='focused-news-swiper-wapper'>
+        <view class='focused-news-swiper-wapper' bindtap='onTap' data-id = "{{item.id}}">
           <image src="{{item.img}}" class='focused-news-image' mode='aspectFill'></image>
           <view class='focused-news-title'>{{item.title}}</view>
         </view>
