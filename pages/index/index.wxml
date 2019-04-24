@@ -1,13 +1,14 @@
 <!--导航栏-->
 
-  <view class='channel-bar-wrapper'>
-  <scroll-view  scroll-x>
-  <view class= 'channel-bar-scroller'>
-    <view class='channel-wrapper' wx:for="{{channelTitle}}">
-      <view class='channel-title'>{{item}}</view>
-    </view></view>
-    </scroll-view>
-  </view>
+<view class='channel-bar-wrapper'>
+  <scroll-view scroll-x>
+    <view class='channel-bar-scroller'>
+      <view class='channel-wrapper' wx:for="{{channelTitle}}">
+        <view class='channel-title'>{{item}}</view>
+      </view>
+    </view>
+  </scroll-view>
+</view>
 
 <!--轮播最新热点-->
 <view class='lateast-news-wrapper'>
@@ -30,9 +31,11 @@
       <view class='news-list-title'>{{item.title}}
       </view>
       <view class='news-list-source'>{{item.source}}</view>
-      <view class='news-list-date'>{{item.date}}</view>
+      <view class='news-list-date'>{{item.pubDate}}</view>
     </view>
-    <image class='news-list-img' mode='aspectFill' src='{{item.img}}'></image>
-
+    <view>
+      <image class='news-list-img' wx:if="{{!item.img}}" src='../../images/defaultImg.jpg' mode='aspectFill'></image>
+    <image wx:else  class='news-list-img' mode='aspectFill ' src='{{item.img}} '></image>
+    </view>
   </view>
 </view>

@@ -70,11 +70,12 @@ swiper-item {
 .focused-news-title {
   position: absolute;
   left: 0;
+  right: 0;
   top: 248rpx;
-  text-align: left;
-  padding-left: 20rpx;
-  padding-right: 10rpx;
+  height: 149rpx;
   background-color: rgba(240, 233, 233, 0.822);
+  text-align: left;
+  padding: 0 20rpx;
 }
 
 /*新闻列表*/
