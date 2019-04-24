@@ -1,6 +1,6 @@
 /*导航栏*/
 
-.class-bar-wrapper {
+.channel-bar-wrapper {
   position: fixed;
   z-index: 10;
   background-color: #dbdbdb;
@@ -9,25 +9,24 @@
   left: 0;
 }
 
-.class-bar-scroller {
+.channel-bar-scroller {
   width: 750rpx;
   display: flex;
 }
 
-.classes-wrapper {
+.channel-wrapper {
   display: flex;
   flex-direction: row;
   flex-shrink: 0;
-  width: 100rpx;
   height: 70rpx;
-  margin: 10rpx;
+  margin: 5rpx 20rpx;
   align-items: center;
   text-align: center;
 }
 
-.class-title {
-  font-size: 35rpx;
-  line-height: 70rpx;
+.channel-title {
+  font-size: 30rpx;
+  line-height: 42rpx;
   opacity: 0.6;
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
@@ -54,12 +53,12 @@ swiper-item {
   height: 100%;
 }
 
-.latest-news-swiper-wapper {
+.focused-news-swiper-wapper {
   height: 350rpx;
   position: relative;
 }
 
-.latest-news-image {
+.focused-news-image {
   position: absolute;
   left: 0;
   top: 0;
@@ -68,7 +67,7 @@ swiper-item {
   margin: auto;
 }
 
-.latest-news-title {
+.focused-news-title {
   position: absolute;
   left: 0;
   top: 248rpx;
