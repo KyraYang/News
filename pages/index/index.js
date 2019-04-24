@@ -1,51 +1,43 @@
-const channelTitleMap = {
-  'gn': '国内',
-  'gj': '国际',
-  'cj': '财经',
-  'hlw': '互联网',
-  'ty': '体育',
-  'kj': '科技',
-  'sh': '社会',
-  'yl': '娱乐',
-  'js': '军事',
-}
 const channelIdMap = {
   //焦点新闻, 
-  'gn': "5572a108b3cdc86cf39001cd",
-  'gj': "5572a108b3cdc86cf39001ce",
-  'cj': "5572a108b3cdc86cf39001d0",
-  'hlw': "5572a108b3cdc86cf39001d1",
-  'ty': "5572a108b3cdc86cf39001d4",
-  'kj': "5572a108b3cdc86cf39001d9",
-  'sh': "5572a109b3cdc86cf39001da",
-  'yl': "5572a108b3cdc86cf39001d5",
-  'js': "5572a108b3cdc86cf39001cf",
+  '国内': "5572a108b3cdc86cf39001cd",
+  '国际': "5572a108b3cdc86cf39001ce",
+  '财经': "5572a108b3cdc86cf39001d0",
+  '互联网': "5572a108b3cdc86cf39001d1",
+  '体育': "5572a108b3cdc86cf39001d4",
+  '科技': "5572a108b3cdc86cf39001d9",
+  '社会': "5572a109b3cdc86cf39001da",
+  '娱乐': "5572a108b3cdc86cf39001d5",
+  '军事': "5572a108b3cdc86cf39001cf",
 }
 
 
 Page({
   data: {
     pageNumber: 1,
+    channel: '国内',
   },
 
   //开始页面
   onLoad() {
     //set channel bar
     let channelTitle = []
-    for (let x in channelTitleMap) {
-      channelTitle.push(channelTitleMap[x])
+    for (let x in channelIdMap) {
+      channelTitle.push(x)
     }
     this.setData({
       channelTitle: channelTitle
     })
     //get gn news
     this.setFirstPage()
+    console.log(this)
   },
 
 
   //上拉触底加入新新闻
   onReachBottom() {
     let page = this.data.pageNumber + 1
+    let channel = this.data.channel
     if (page <= this.data.totalPage) {
       wx.showLoading({
         title: '加载中...',
@@ -55,7 +47,7 @@ Page({
         data: {
           "showapi_appid": '92969', //这里需要改成自己的appid
           "showapi_sign": 'eedcb02a3323485a84c33b72074df757', //这里需要改成自己的应用的密钥secret
-          "channelId": channelIdMap.gn,
+          "channelId": channelIdMap[channel],
           "page": page,
           "needAllList": "0",
           "maxResult": 10,
@@ -68,34 +60,35 @@ Page({
           let newsData = res.data.showapi_res_body.pagebean.contentlist
           this.data.newsList = this.data.newsList.concat(newsData)
           this.setData({
-           newsList: this.data.newsList,
+            newsList: this.data.newsList,
             pageNumber: page,
           })
           wx.hideLoading()
         },
-        fail:res =>{
+        fail: res => {
           wx.hideLoading()
         }
       }, )
     }
   },
 
-//下拉刷新
-onPullDownRefresh(){
-this.setFirstPage()
-wx.stopPullDownRefresh()
-console.log('refreshed')
-},
+  //下拉刷新
+  onPullDownRefresh() {
+    this.setFirstPage()
+    wx.stopPullDownRefresh()
+    console.log('refreshed')
+  },
 
 
   //API接入
   setFirstPage() {
+    let channel = this.data.channel
     wx.request({
       url: 'https://route.showapi.com/109-35',
       data: {
         "showapi_appid": '92969', //这里需要改成自己的appid
         "showapi_sign": 'eedcb02a3323485a84c33b72074df757', //这里需要改成自己的应用的密钥secret
-        "channelId": channelIdMap.gn,
+        "channelId": channelIdMap[channel],
         "page": 1,
         "needAllList": "0",
         "maxResult": 10,
@@ -130,8 +123,14 @@ console.log('refreshed')
     let newsId = event.currentTarget.dataset.id
     console.log(newsId)
     wx.navigateTo({
-      url: '../content/content?id='+newsId,
+      url: '../content/content?id=' + newsId,
     })
-    
+  },
+
+  //点击转换channel
+  onTapChannel: (event) => {
+    let selectChannel = event.currentTarget.dataset.name
+    console.log(this)
+   
   }
 })
