@@ -1,7 +1,20 @@
+const channelTitleMap = {
+  'gn': '国内',
+  'gj': '国际',
+  'cj': '财经',
+  'hlw': '互联网',
+  'ty': '体育',
+  'kj': '科技',
+  'sh': '社会',
+  'yl': '娱乐',
+  'js': '军事',
+}
+const channelIdMap = {
+
+}
 Page({
   data: {
-    classTitle: ['国内', '社会', '国际', '财经', '娱乐', '体育', '军事', '凑数的', '其他'],
-    latestNews: [{
+    focusedNews: [{
       "id": 1552623252492,
       "title": "阿尔斯通高管新书《美国陷阱》揭露 美用司法武器实施全球经济战",
       "date": "2019-03-14T09:47:37.000Z",
@@ -19,7 +32,7 @@ Page({
       "date": "2019-03-14T04:01:55.000Z",
       "source": "新华网",
       "img": "//inews.gtimg.com/newsapp_bt/0/8132916838/641"
-    }, ],
+    }],
     newsList: [{
         "title": "外媒称香港回归15年打破“经济将死”预言",
         "date": "2012-07-01T09:34:12.000Z",
@@ -54,8 +67,16 @@ Page({
     ]
 
   },
-  onLoad() {}
-  /*API接入
+  onLoad() {
+    //set channel bar
+    let channelTitle = []
+    for (let x in channelTitleMap) {
+      channelTitle.push(channelTitleMap[x])
+    }
+    this.setData({
+      channelTitle: channelTitle
+    })}
+    /*API接入
     wx.request({
       url: 'https://route.showapi.com/109-35',
       data: {
@@ -72,7 +93,8 @@ Page({
         "id": ""
       },
       header: {
-        'content-type': 'application/json' },
+        'content-type': 'application/json'
+      },
       success: res => {
         let newsData = res.data
         console.log(newsData.showapi_res_body.pagebean.contentlist[0])
