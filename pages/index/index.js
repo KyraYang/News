@@ -48,7 +48,7 @@ Page({
   },
 
 
-  //上拉触底出发刷新
+  //上拉触底加入新新闻
   onReachBottom() {
     let page = this.data.pageNumber + 1
     if (page <= this.data.totalPage) {
@@ -72,9 +72,6 @@ Page({
         success: res => {
           let newsData = res.data.showapi_res_body.pagebean.contentlist
           this.data.newsList = this.data.newsList.concat(newsData)
-          console.log(this.data.newsList)
-          console.log(this.data.pageNumber)
-          console.log(this.data.totalPage)
           this.setData({
            newsList: this.data.newsList,
             pageNumber: page,
@@ -88,7 +85,12 @@ Page({
     }
   },
 
-
+//下拉刷新
+onPullDownRefresh(){
+this.setFirstPage()
+wx.stopPullDownRefresh()
+console.log('refreshed')
+},
 
 
   //API接入
