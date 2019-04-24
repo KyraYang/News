@@ -28,7 +28,7 @@
 <!--详细新闻-->
 <view class='news-list-wrapper'>
   <view class='news-list 'wx:for="{{newsList}}">
-    <view class='news-list-content '>
+    <view class='news-list-content' bindtap='onTap' data-id = "{{item.id}}">
       <view class='news-list-title '>{{item.title}}
       </view>
       <view class='news-list-source '>{{item.source}}</view>
