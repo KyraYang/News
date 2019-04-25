@@ -103,12 +103,14 @@ Page({
         let listNews = []
         for (let i = 0; i < 10; i++) {
           let oneNews = newsData[i]
-          if (oneNews.havePic && imgNews.length < 4) {
+          if (oneNews.havePic && imgNews.length < 3) {
             imgNews.push(oneNews)
           } else {
             listNews.push(oneNews)
           }
         }
+        console.log(imgNews)
+        console.log(listNews)
         this.setData({
           focusedNews: imgNews,
           newsList: listNews,
@@ -128,9 +130,11 @@ Page({
   },
 
   //点击转换channel
-  onTapChannel: (event) => {
-    let selectChannel = event.currentTarget.dataset.name
-    console.log(this)
-   
+  onTapChannel(event) {
+    let tapChannel = event.currentTarget.dataset.name
+    this.setData({
+      channel: tapChannel
+    })
+    this.setFirstPage()
   }
 })

@@ -4,7 +4,7 @@
   <scroll-view scroll-x>
     <view class='channel-bar-scroller'>
       <view class='channel-wrapper' wx:for="{{channelTitle}}">
-        <view class='channel-title'bindtap="onTapChannel" data-name="{{item}}">{{item}}</view>
+        <view class='channel-title' bindtap="onTapChannel" data-name="{{item}}">{{item}}</view>
       </view>
     </view>
   </scroll-view>
@@ -13,10 +13,10 @@
 <!--轮播最新热点-->
 
 <view class='lateast-news-wrapper'>
-  <swiper autoplay='true' interval='5000' duration='1000'  mode='widthFix'>
+  <swiper autoplay='true' interval='5000' duration='1000' mode='widthFix'>
     <block wx:for='{{focusedNews}}'>
       <swiper-item>
-        <view class='focused-news-swiper-wapper' bindtap='onTap' data-id = "{{item.id}}">
+        <view class='focused-news-swiper-wapper' bindtap='onTap' data-id="{{item.id}}">
           <image src="{{item.img}}" class='focused-news-image' mode='aspectFill'></image>
           <view class='focused-news-title'>{{item.title}}</view>
         </view>
@@ -27,8 +27,8 @@
 
 <!--详细新闻-->
 <view class='news-list-wrapper'>
-  <view class='news-list 'wx:for="{{newsList}}">
-    <view class='news-list-content' bindtap='onTap' data-id = "{{item.id}}">
+  <view class='news-list ' wx:for="{{newsList}}">
+    <view class='news-list-content' bindtap='onTap' data-id="{{item.id}}">
       <view class='news-list-title '>{{item.title}}
       </view>
       <view class='news-list-source '>{{item.source}}</view>
@@ -36,9 +36,7 @@
     </view>
     <view>
       <image class='news-list-img ' wx:if="{{!item.img}}" src='../../images/defaultImg.jpg ' mode='aspectFill '></image>
-    <image wx:else  class='news-list-img ' mode='aspectFill ' src='{{item.img}} '></image>
+      <image wx:else class='news-list-img ' mode='aspectFill ' src='{{item.img}} '></image>
     </view>
   </view>
 </view>
-
-
