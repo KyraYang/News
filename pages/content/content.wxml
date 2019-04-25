@@ -8,7 +8,7 @@
   <view class='content'>
     <view wx:for="{{content}}">
       <view wx:if="{{item.url}}">
-        <image class='content-img' src='{{item.url}}' mode='aspectFill'></image>
+        <image class='content-img' src='{{item.url}}' mode='aspectFit' binderror='errImg'data-errImg="{{index}}"></image>
       </view>
       <view wx:else class='content-text'>{{item}}</view>
     </view>

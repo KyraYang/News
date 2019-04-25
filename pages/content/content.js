@@ -4,8 +4,7 @@ Page({
   /**
    * Page initial data
    */
-  data: {  
-  },
+  data: {},
 
   /**
    * Lifecycle function--Called when page load
@@ -25,14 +24,30 @@ Page({
       },
       success: res => {
         let newsContent = res.data.showapi_res_body.pagebean.contentlist[0]
-        console.log(newsContent)
+        let content = newsContent.allList
+        for(let i = 0;i <content.length; i++){
+          if (content[i].url){
+            if ((content[i].url).indexOf('thumbnail') !== -1 || (content[i].url).indexOf('end_news') !== -1){     
+              content[i] = ''
+            }
+          }
+        }
         this.setData({
-          content: newsContent.allList,
+          content: content,
           pubDate: newsContent.pubDate,
           title: newsContent.title,
           source: newsContent.source
         })
       },
+    })
+  },
+  //当imge 403
+  errImg(e) {
+    console.log(e)
+    let index = e.currentTarget.dataset.errimg
+    this.data.content[index] = {url:'../../images/defaultImg.jpg'}
+    this.setData({
+      content: this.data.content
     })
   }
 

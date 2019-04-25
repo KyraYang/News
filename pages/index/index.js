@@ -16,21 +16,26 @@ Page({
   data: {
     pageNumber: 1,
     channel: '国内',
+    channelIndex: 0,
   },
 
   //开始页面
   onLoad() {
     //set channel bar
     let channelTitle = []
+    let clickedChannel = {}
     for (let x in channelIdMap) {
-      channelTitle.push(x)
+      channelTitle.push({
+        "city": x,
+        "style": 'none'
+      })
     }
     this.setData({
-      channelTitle: channelTitle
+      channelTitle: channelTitle,
     })
+    console.log(this.data.defalutStyle)
     //get gn news
     this.setFirstPage()
-    console.log(this)
   },
 
 
@@ -96,9 +101,9 @@ Page({
 
   //点击转换channel
   onTapChannel(event) {
-    let tapChannel = event.currentTarget.dataset.name
     this.setData({
-      channel: tapChannel
+      channel: event.currentTarget.dataset.name,
+      channelIndex: event.currentTarget.dataset.id
     })
     wx.pageScrollTo({
       scrollTop: 0,
@@ -124,43 +129,59 @@ Page({
         'content-type': 'application/json'
       },
       success: res => {
-        let newsData = res.data.showapi_res_body.pagebean.contentlist
-        let imgNews = []
-        let listNews = []
-        for (let i = 0; i < 10; i++) {
-          let oneNews = newsData[i]
-          if (oneNews.havePic && imgNews.length < 3) {
-            if (!oneNews.img) {
-              oneNews['img'] = oneNews.imageurls[0].url
-            }
-            if ((oneNews.img).indexOf('thumbnail') !== -1 || (oneNews.img).indexOf('end_news') !== -1) { //确保大图是新闻相关图片
-              delete oneNews.img
-              listNews.push(oneNews)
-            } else {
-              imgNews.push(oneNews)
-              continue
-            }
-          } else {
-            if (oneNews.havePic) { //确保图片是新闻相关图片
-              oneNews = this.organiseImg(oneNews)
-            }
-          }
-          listNews.push(oneNews)
-        }
-        if(!imgNews){
-          imgNews = this.data.focusedNews
-        }
-        this.setData({
-          focusedNews: imgNews,
-          newsList: listNews,
-          totalPage: res.data.showapi_res_body.pagebean.allPages,
-          pageNumber: 1
-        })
+        this.setNews(res)
+        this.showClickedChannel()
       },
     })
   },
 
+  //设置新闻
+  setNews(res) {
+    let newsData = res.data.showapi_res_body.pagebean.contentlist
+    let imgNews = []
+    let listNews = []
+    for (let i = 0; i < 10; i++) {
+      let oneNews = newsData[i]
+      if (oneNews.havePic && imgNews.length < 3) {
+        if (!oneNews.img) {
+          oneNews['img'] = oneNews.imageurls[0].url
+        }
+        if ((oneNews.img).indexOf('thumbnail') !== -1 || (oneNews.img).indexOf('end_news') !== -1) { //确保大图是新闻相关图片
+          delete oneNews.img
+          listNews.push(oneNews)
+        } else {
+          imgNews.push(oneNews)
+          continue
+        }
+      } else {
+        if (oneNews.havePic) { //确保图片是新闻相关图片
+          oneNews = this.organiseImg(oneNews)
+        }
+      }
+      listNews.push(oneNews)
+    }
+    if (!imgNews) { //如果前十条里没有带图新闻
+      console.log(imgNews)
+      imgNews = this.data.focusedNews
+    }
+    this.setData({
+      focusedNews: imgNews,
+      newsList: listNews,
+      totalPage: res.data.showapi_res_body.pagebean.allPages,
+      pageNumber: 1,
+    })
+  },
 
+  //indicate which channel I choose
+  showClickedChannel() {
+    this.data.channelTitle.forEach(function(value) {
+      value.style = 'none'
+    })
+    this.data.channelTitle[this.data.channelIndex].style = "border-bottom: 4px solid maroon"
+    this.setData({
+      channelTitle: this.data.channelTitle
+    })
+  },
 
   //保证图片与新闻相关
   organiseImg(oneNews) {
@@ -172,4 +193,14 @@ Page({
     }
     return oneNews
   },
+
+  //当imge 403
+  errImg(e) {
+    console.log(e)
+    let index = e.currentTarget.dataset.errimg
+    this.data.newsList[index].img = '../../images/defaultImg.jpg'
+    this.setData({
+      newsList: this.data.newsList
+    })
+  }
 })

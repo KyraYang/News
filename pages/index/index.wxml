@@ -3,8 +3,8 @@
 <view class='channel-bar-wrapper'>
   <scroll-view scroll-x>
     <view class='channel-bar-scroller'>
-      <view class='channel-wrapper' wx:for="{{channelTitle}}">
-        <view class='channel-title' bindtap="onTapChannel" data-name="{{item}}">{{item}}</view>
+      <view class='channel-wrapper' wx:for="{{channelTitle}}" >
+      <view class='channel-title' bindtap="onTapChannel" data-name="{{item.city}}" data-id = "{{index}}" style = "{{item.style}}" >{{item.city}}</view>
       </view>
     </view>
   </scroll-view>
@@ -35,8 +35,8 @@
       <view class='news-list-date '>{{item.pubDate}}</view>
     </view>
     <view>
-      <image class='news-list-img ' wx:if="{{!item.img}}" src='../../images/defaultImg.jpg ' mode='aspectFill '></image>
-      <image wx:else class='news-list-img ' mode='aspectFill ' src='{{item.img}} '></image>
+      <image class='news-list-img ' wx:if="{{!item.img}}" src='../../images/defaultImg.jpg' mode='aspectFill '></image>
+      <image wx:else class='news-list-img ' mode='aspectFill ' src='{{item.img}}' binderror='errImg'data-errImg="{{index}}" ></image>
     </view>
   </view>
 </view>
