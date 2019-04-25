@@ -58,7 +58,13 @@ Page({
         },
         success: res => {
           let newsData = res.data.showapi_res_body.pagebean.contentlist
-          this.data.newsList = this.data.newsList.concat(newsData)
+          for (let i = 0; i < 10; i++) {
+            let oneNews = newsData[i]
+            if (oneNews.havePic) {
+              oneNews = this.organiseImg(oneNews)
+            }
+            this.data.newsList.push(oneNews)
+          }
           this.setData({
             newsList: this.data.newsList,
             pageNumber: page,
@@ -79,8 +85,28 @@ Page({
     console.log('refreshed')
   },
 
+  //点击时，跳转到相关新闻
+  onTap: (event) => {
+    let newsId = event.currentTarget.dataset.id
+    console.log(newsId)
+    wx.navigateTo({
+      url: '../content/content?id=' + newsId,
+    })
+  },
 
-  //API接入
+  //点击转换channel
+  onTapChannel(event) {
+    let tapChannel = event.currentTarget.dataset.name
+    this.setData({
+      channel: tapChannel
+    })
+    wx.pageScrollTo({
+      scrollTop: 0,
+    })
+    this.setFirstPage()
+  },
+
+  //API接入，获取第一页信息
   setFirstPage() {
     let channel = this.data.channel
     wx.request({
@@ -104,37 +130,46 @@ Page({
         for (let i = 0; i < 10; i++) {
           let oneNews = newsData[i]
           if (oneNews.havePic && imgNews.length < 3) {
-            imgNews.push(oneNews)
+            if (!oneNews.img) {
+              oneNews['img'] = oneNews.imageurls[0].url
+            }
+            if ((oneNews.img).indexOf('thumbnail') !== -1 || (oneNews.img).indexOf('end_news') !== -1) { //确保大图是新闻相关图片
+              delete oneNews.img
+              listNews.push(oneNews)
+            } else {
+              imgNews.push(oneNews)
+              continue
+            }
           } else {
-            listNews.push(oneNews)
+            if (oneNews.havePic) { //确保图片是新闻相关图片
+              oneNews = this.organiseImg(oneNews)
+            }
           }
+          listNews.push(oneNews)
         }
-        console.log(imgNews)
-        console.log(listNews)
+        if(!imgNews){
+          imgNews = this.data.focusedNews
+        }
         this.setData({
           focusedNews: imgNews,
           newsList: listNews,
-          totalPage: res.data.showapi_res_body.pagebean.allPages
+          totalPage: res.data.showapi_res_body.pagebean.allPages,
+          pageNumber: 1
         })
       },
     })
   },
 
-  //点击时，跳转到相关新闻
-  onTap: (event) => {
-    let newsId = event.currentTarget.dataset.id
-    console.log(newsId)
-    wx.navigateTo({
-      url: '../content/content?id=' + newsId,
-    })
-  },
 
-  //点击转换channel
-  onTapChannel(event) {
-    let tapChannel = event.currentTarget.dataset.name
-    this.setData({
-      channel: tapChannel
-    })
-    this.setFirstPage()
-  }
+
+  //保证图片与新闻相关
+  organiseImg(oneNews) {
+    if (!oneNews.img) {
+      oneNews['img'] = oneNews.imageurls[0].url
+    }
+    if ((oneNews.img).indexOf('thumbnail') !== -1 || (oneNews.img).indexOf('end_news') !== -1) {
+      delete oneNews.img
+    }
+    return oneNews
+  },
 })
