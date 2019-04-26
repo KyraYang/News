@@ -25,3 +25,5 @@ cd News-Miniprogramme
 添加项目->选择本项目目录->编译执行；
 
 ## 预览
+
+<img src="images/Preview02.png"> <img src = "https://github.com/KyraYang/News-Miniprogramme/blob/master/images/Preview01.png" >
