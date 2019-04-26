@@ -18,7 +18,8 @@
 克隆本项目代码到本地
 ```
 git clone https://github.com/KyraYang/News-Miniprogramme.git 
-cd weapp-newsapp
+
+cd News-Miniprogramme
 ```
 打开微信开发者工具；
 添加项目->选择本项目目录->编译执行；
