@@ -4,7 +4,7 @@
   <scroll-view scroll-x>
     <view class='channel-bar-scroller'>
       <view class='channel-wrapper' wx:for="{{channelTitle}}" >
-      <view class='channel-title'>{{item.city}}</view>
+      <view class='channel-title' bindtap="onTapChannel" data-name="{{item.city}}" data-id = "{{index}}" style = "{{item.style}}" >{{item.city}}</view>
       </view>
     </view>
   </scroll-view>
