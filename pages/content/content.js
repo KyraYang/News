@@ -27,7 +27,7 @@ Page({
         let content = newsContent.allList
         for(let i = 0;i <content.length; i++){
           if (content[i].url){
-            if ((content[i].url).indexOf('thumbnail') !== -1 || (content[i].url).indexOf('end_news') !== -1){     
+            if ((content[i].url).indexOf('thumbnail') !== -1 || (content[i].url).indexOf('end_news') !== -1){   
               content[i] = ''
             }
           }

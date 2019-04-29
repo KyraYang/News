@@ -161,7 +161,6 @@ Page({
       listNews.push(oneNews)
     }
     if (!imgNews) { //如果前十条里没有带图新闻
-      console.log(imgNews)
       imgNews = this.data.focusedNews
     }
     this.setData({
